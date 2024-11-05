@@ -23,42 +23,13 @@ public class LectorArchivo {
         String rutaArchivoEstudiantes = "src/datos/estudiantes.txt";
         
         try (Scanner scanner = new Scanner(new File(rutaArchivo))) {
-            scanner.useDelimiter(",\\s*");
-
-            while (scanner.hasNext()) {
-                String linea = scanner.nextLine();
-                String[] campos = linea.split(",");
-
-                // Aquí se procesan los campos y se agregan a las listas correspondientes
-                int id = Integer.parseInt(campos[0].replaceAll("\"", ""));
-                String nombre = campos[1].replaceAll("\"", "");
-                boolean disponible = Boolean.parseBoolean(campos[2].replaceAll("\"", ""));
-                 // Agregar el recurso a la lista de recursos
-                Recurso recurso = new Recurso(id, nombre, disponible);
-                recursos.agregar(recurso);
-                
+            
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        try (Scanner scannerEstudiantes = new Scanner(new File(rutaArchivoEstudiantes))) {
-            scannerEstudiantes.useDelimiter(",\\s*");
-
-            while (scannerEstudiantes.hasNext()) {
-                String linea = scannerEstudiantes.nextLine();
-                String[] campos = linea.split(",");
-
-                // Aquí se procesan los campos y se agregan a las listas correspondientes
-                int codigo = Integer.parseInt(campos[0].replaceAll("\"", ""));
-                String nombre = campos[1].replaceAll("\"", "");
-                String email = campos[2].replaceAll("\"", "");
-                String fechaNac = campos[3].replaceAll("\"", "");
-                String sexo = campos[4].replaceAll("\"", "");
-                String programa = campos[5].replaceAll("\"", "");
-               
-                // Agregar el estudiante a la lista de estudiantes
-                Estudiante est = new Estudiante(codigo, nombre, new Email(email), new Fecha(fechaNac), sexo, programa);
-                estudiantes.agregar(est);
+        try () {
+           
 
             }
         } catch (FileNotFoundException e) {

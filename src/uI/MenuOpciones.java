@@ -50,30 +50,7 @@ public class MenuOpciones {
 	}
 	   
 	public void eliminarRecurso() {
-		try {
-			Integer id;
-			     
-			do {
-				
-				System.out.println("Ingresar el Id de Recurso");
-				System.out.println("El ID del Estudiante debe existir");
-				
-	
-				System.out.print("Id:");
-				id = entrada.nextInt();
-				
 		
-			}while ((univ.buscarRecurso(id) == null));
-			
-			if(univ.eliminarRecurso(id)){
-				System.out.println("El Recurso se Eliminó Exitosamente");
-			}else{
-				System.out.println("El recurso NO SE HA Eliminado");
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
 	  
 	}
 	public void devolverRecurso() {
@@ -122,113 +99,19 @@ public class MenuOpciones {
 	  
 	}
 	public void mostrarRecursos() {
-		try {
-			univ.mostrarRecursos();
-			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	  
+		
 	}
     public  void agregarEstudiante() {
 		
-		try {
-			Integer codigo;
-			String nombre, email,sexo,programa;
-			String sFecha;
-			Fecha fechaNac=null;
-			boolean fechaValida = false;
-        	DateTimeFormatter formato = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-			      
-			do {
-				
-				System.out.println("Ingresar un nuevo Estudiante");
-				System.out.println("El ID del Estudiante no puede repetirse");
-			
-				System.out.print("Código:");
-				
-				codigo = entrada.nextInt();
-				
-			}while (!(univ.buscarEstudiante(codigo) == null));
-			
-			entrada.nextLine();
-			System.out.print("NOMBRE:");
-			nombre = entrada.nextLine();
-			try {
-				System.out.print("CORREO:");
-				email = entrada.nextLine();
-				new Email(email);
-			}
-			catch (Exception e) {
-				System.out.println("Correo no válido");
-				System.out.println("Si desea agregar nuevamente un contacto");
-				System.out.println("Seleccione la opción 1");
-				return;
-			}
-			
-			 // Validar la fecha de nacimiento
-			 while (!fechaValida) {
-				try {
-					System.out.print("Fecha Nacimiento (MM/dd/yyyy): ");
-					sFecha = entrada.nextLine();
-					LocalDate fechaLocalDate = LocalDate.parse(sFecha, formato);
-					fechaNac = new Fecha(sFecha); // Asumiendo que tienes una clase Fecha que acepta un String
-					fechaValida = true; // Si no hay excepción, la fecha es válida
-				} catch (DateTimeParseException e) {
-					System.out.println("Fecha inválida. Por favor, ingrese una fecha en el formato MM/dd/yyyy.");
-				}
-			}
-			System.out.print("Sexo:");
-			sexo = entrada.nextLine();
-			System.out.print("Programa:");
-			programa = entrada.nextLine();
-	
-			if (univ.agregarEstudiante(codigo, nombre, email, fechaNac, sexo, programa)){
-				System.out.println("El Estudiante se ha agregado exitosamente");
-			}else{
-				System.out.println("El Estudiante NO SE HA Agregado");
-			}
-			
-	
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 		
 	}
 	   
 	public void eliminarEstudiante() {
-		try {
-			Integer codigo;
-			     
-			do {
-				
-				System.out.print("Código:");
-				codigo = entrada.nextInt();
-				
-			} while (univ.buscarEstudiante(codigo) == null);
-
-			if(univ.eliminarEstudiante(codigo)){
-				System.out.println("El Estudiante se ha eliminado correctamente");
-			}else{
-				System.out.println("El Estudiante NO SE HA Eliminado");
-			}
-
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		
 	}
 	public void mostrarEstudiantes() {
-		try {
-			univ.mostrarEstudiantes();
-	
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 	 
 	}
     public  void prestarRecurso() {
@@ -284,76 +167,15 @@ public class MenuOpciones {
 	
     public  void ConsultarRecursoPrestado() {
 		
-		try {
-			Integer id;
-			String nombre;
-			do {
-				
-				System.out.print("Ingresar  ID Recurso:");
-			
-				id = entrada.nextInt();
 		
-			}while ((univ.buscarRecurso(id) == null));
-			
-			nombre= univ.buscarNombreRecurso(id);
-				System.out.print("\t"+nombre+" ");
-			
-			univ.consultarEstudianteTieneRecurso(id);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
 		
 	}
     public  void consultarRecursosEstudiante() {
-		try {
-			Integer codigo;
-			String nombre;
-			do {
-				
-				System.out.print("Ingresar código Estudiante: ");
-				codigo = entrada.nextInt();
-				
-			} while ((univ.buscarEstudiante(codigo) == null));
-			
-			nombre = univ.buscarNombreEstudiante(codigo);
-			System.out.println("\t"+nombre);
-			
-			Lista <Recurso> recursos = univ.consultarRecursosDeUnEstudiante(codigo);
-			for (int i=0;i<recursos.getTamanio();i++) {
-				System.out.println(recursos.getValor(i));
-			}
 		
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
 	
     }
     public  void consultarRecursosEstudianteMasDeTres() {
-		try {
-			 Lista<Estudiante> prestamosMasDeTres=new Lista<Estudiante>();
-			 prestamosMasDeTres=univ.mostrarEstudiantesMasDeTres();
-			 if (prestamosMasDeTres.getTamanio()==0)
-				 System.out.println("*** No Existe ningún estudiante con mas de TRES préstamos ***");
-			 else
-				 System.out.println("*** Estudiantes con mas de Tres Préstamos ***");
-				 
-			
-			 for(int i=0;i<prestamosMasDeTres.getTamanio();i++) {
-				 System.out.println("Estudiante: "+
-			 prestamosMasDeTres.getValor(i).getNombre()+" "+prestamosMasDeTres.getValor(i).getCodigo()+" "+
-						                           prestamosMasDeTres.getValor(i).getEmail()+" "+
-						                           prestamosMasDeTres.getValor(i).getPrograma()+" "+
-						                           prestamosMasDeTres.getValor(i).getSexo()+" "+
-						                           prestamosMasDeTres.getValor(i).getFechaNac()+" ");
-			 }
 		
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	
     }
 	
 }
